@@ -41,7 +41,7 @@ public class EmpController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value={"/main"})
+	@RequestMapping(value={"/emp/main"})
 	public String mian(Model model) {
 
 		List<Emp> empList = empService.findEmpList();

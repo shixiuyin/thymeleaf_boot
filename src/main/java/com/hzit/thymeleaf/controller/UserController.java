@@ -25,7 +25,7 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/login")
-	public String login(String username, String pwd, HttpSession session, HttpServletRequest request) {
+	public String login(String username, String pwd, HttpSession session, HttpServletRequest request,Model model) {
 		Users users = userService.login(username, pwd);
 
 		request.getSession().setAttribute("msg","这是一个测试");
@@ -35,14 +35,14 @@ public class UserController {
 			session.setAttribute("userInfo", users);
 
 			// 跳转到主界面  默认分页   第一页 显示5条记录
-			return "redirect:/main";
+			return "redirect:/emp/main";
 		} else {
+			//session.setAttribute("msg", "登录失败，请检查!!!");
 
-
-			session.setAttribute("msg", "登录失败，请检查!!!");
+			model.addAttribute("msg","登录失败，请检查");
 
 			// 跳转到登录界面，并且添加错误信息 /请求去到对应的jsp
-			return "redirect:/";
+			return "login";
 		}
 
 	}
