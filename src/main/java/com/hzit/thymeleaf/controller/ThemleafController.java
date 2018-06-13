@@ -16,8 +16,20 @@ public class ThemleafController {
         //model.addAttribute("hello","hello,我是一只小小鸟");
         session.setAttribute("hello","我是session,我不是一个小小鸟");
 
+
+        session.setAttribute("welcom","你好，欢迎你:{0}");
+
+
         /*前缀+名称+后缀*/
-        return "redirect:/thyme.html";
+        return "redirect:/thyme_tz";
     }
+
+
+    @RequestMapping("thyme_tz")
+    public  String thyme2(){
+
+        return "thyme";
+    }
+
 
 }

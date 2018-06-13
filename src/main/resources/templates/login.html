@@ -33,7 +33,7 @@
 
       <form class="form-signin" action="main.html" th:action="@{/user/login}" th:method="POST">
         <h2 class="form-signin-heading">Please sign</h2>
-        <div th:text="${msg}" style="color: red"></div>
+        <div th:text="${session.msg}" style="color: red"></div>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="username">
         <label for="inputPassword" class="sr-only">Password</label>

@@ -40,9 +40,9 @@ public class UserController {
 			//session.setAttribute("msg", "登录失败，请检查!!!");
 
 			model.addAttribute("msg","登录失败，请检查");
-
+			session.setAttribute("msg","登录失败，请检查...session");
 			// 跳转到登录界面，并且添加错误信息 /请求去到对应的jsp
-			return "login";
+			return "redirect:/login.html";
 		}
 
 	}

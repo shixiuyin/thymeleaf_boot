@@ -7,7 +7,11 @@
 </head>
 <body>
     <!--使用模板指定标签  hello:为域对象里面的内容-->
-    <div th:text="${session.msg}"></div>
-------
+    <div th:text="${session.hello}"></div>
+
+    <hr/>
+
+    <div th:utext="${session.welcom}"></div>
+
 </body>
 </html>
