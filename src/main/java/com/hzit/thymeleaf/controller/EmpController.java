@@ -57,6 +57,7 @@ public class EmpController {
 		return "main";
 	}
 
+
 	// 删除 emp/{empno} delete请求
 	// @RequestMapping(method = RequestMethod.DELETE)
 	@DeleteMapping("/emp/{empno}") // url模板
@@ -67,7 +68,7 @@ public class EmpController {
 
 		// 重新去查询
 
-		return "redirect:/emp/main/1/5";
+		return "redirect:/emp/main";
 	}
 
 	@GetMapping("/emp/{empno}") // url模板
@@ -115,7 +116,7 @@ public class EmpController {
 		// 重新去查询
 		model.addAttribute("deptList", deptList);
 
-		return "WEB-INF/jsp/addEmp";
+		return "addEmp";
 	}
 
 	@DeleteMapping("/emps") // url模板
@@ -149,7 +150,7 @@ public class EmpController {
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("pageInfo", pageInfo);
 
-		return "WEB-INF/jsp/main";
+		return "main";
 	}
 
 }
