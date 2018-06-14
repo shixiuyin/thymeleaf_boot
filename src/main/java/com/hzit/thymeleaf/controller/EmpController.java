@@ -84,7 +84,7 @@ public class EmpController {
 		model.addAttribute("empInfo", emp);
 		model.addAttribute("deptList", deptList);
 
-		return "WEB-INF/jsp/update";
+		return "updateEmp";
 	}
 
 	@PutMapping("/emp") // url模板
@@ -94,7 +94,7 @@ public class EmpController {
 
 		logger.info("修改>>>>>" + emp);
 
-		return "redirect:/emp/main/1/5";
+		return "redirect:/emp/main";
 	}
 
 	// 页面尚未完成
@@ -105,7 +105,7 @@ public class EmpController {
 
 		logger.info("修改>>>>>" + emp);
 
-		return "redirect:/emp/main/1/5";
+		return "redirect:/emp/main";
 	}
 
 	// 去到新增页面
@@ -124,7 +124,7 @@ public class EmpController {
 		if (null != emps) {
 			empService.deleteEmpByIds(emps);
 		}
-		return "redirect:/emp/main/1/5";
+		return "redirect:/emp/main";
 	}
 
 	@GetMapping("/emp/search") // url模板

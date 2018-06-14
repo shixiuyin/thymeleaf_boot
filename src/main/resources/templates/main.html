@@ -103,15 +103,16 @@
 
               <!--emp:集合的元素,itState:状态,需要遍历的值-->
               <tr th:each="emp,itState: ${empList}">
-                <td><input type="checkbox"/> <span th:text="${itState.index+1}"></span></td>
+                <td><input type="checkbox" name="checkbox_name"> <span th:text="${itState.index+1}"></span></td>
                 <td th:text="${emp.empno}">1,001</td>
                 <td th:text="${emp.ename}">Lorem</td>
                 <td th:text="${emp.job}">ipsum</td>
                 <!--设置日期格式-->
                 <td th:text="${#dates.format(emp.hiredate,'yyyy-MM-dd')}">dolor</td>
                 <td th:text="${emp.sal}">sit</td>
-                <td th:text="${emp.deptno}">sit</td>
-                <td><a class="btn btn-sm btn-primary" href="#"><span class="glyphicon glyphicon-edit"></span>编辑</a>
+                <td th:text="${emp.dname}">sit</td>
+                <td><a class="btn btn-sm btn-primary" href="#" th:href="@{'/emp/'+${emp.empno}}"><span
+                        class="glyphicon glyphicon-edit"></span>编辑</a>
                   <!--重新定义一个属性:myhref，设置新的url路径-->
                   <a class="btn btn-sm btn-danger btn-del" th:attr="myhref=@{'/emp/'+${emp.empno}}" href="javascript:void(0)" th:value="${emp.empno}">
                     <span class="glyphicon glyphicon-trash"></span>删除</a></td>
@@ -129,7 +130,7 @@
 
             <!-- 批量删除 -->
             <form action="${pageContext.request.contextPath}/emps"
-                  id="delsForm" method="post">
+                  id="delsForm" method="post" th:action="@{/emps}">
               <!--替换请求方式为DELETE  name:重新指定请求方式  -->
               <input type="hidden" name="_method" value="DELETE">
             </form>
@@ -162,6 +163,58 @@
 
 
      });
+
+     /* 批量删除 */
+     function dels() {
+
+         //1.获取选中的内容
+         var checkObj = $("input[name='checkbox_name']:checked");
+         if (checkObj.length <= 0) {
+             alert("请选择需要删除的数据!!!");
+             return
+         }
+         //2.提示是否删除
+         var flag = window.confirm("是否确认删除??")
+         if (flag) {
+
+             //3.封装参数
+             $.each(checkObj, function (index, obj) {
+                 //根据节点信息，获取对应的 empno
+                 var paramVal = $(obj).parent().next().text();
+                 $("<input type='hidden' name='emps' value='" + paramVal + "' />").appendTo("#delsForm");
+             });
+             //4.提交
+             $("#delsForm").submit();
+         }
+     }
+
+     /* 全选  点击全选按钮*/
+     $(".btn-selectAll")
+         .click(
+             function () {
+                 //多选框
+                 var dates = $("input[name='checkbox_name']");
+
+                 //查找是否包含关键字unchecked，如果包含证明之前没有被选中
+                 if ($(this).find("span").attr("class").indexOf(
+                         "unchecked") != -1) {
+                     //将所有的内容选中
+                     $.each(dates, function (index, data) {
+                         data.checked = true;
+                     })
+                     //将图标设置为全选
+                     $(this).find("span").attr("class",
+                         "glyphicon glyphicon-check");
+                 } else {
+                     //否则设置为未选中
+                     $.each(dates, function (index, data) {
+                         data.checked = false;
+                     })
+                     //图标设置为未选中
+                     $(this).find("span").attr("class",
+                         "glyphicon glyphicon-unchecked");
+                 }
+             });
 
     </script>
 
